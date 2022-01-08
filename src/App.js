@@ -62,7 +62,7 @@ const App = () => {
 
     const addUserHandler = (name, age) => {
         const nameValid = isUsernameValid(name);
-        const ageValid = isAgeValid(age);
+        const ageValid = isAgeValid(+age);
 
         if (!nameValid || !ageValid) {
             return;

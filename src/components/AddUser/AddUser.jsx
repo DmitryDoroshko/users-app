@@ -4,7 +4,7 @@ import AddUserForm from "../AddUserForm/AddUserForm";
 const AddUser = (props) => {
     return (
         <div className="add-user">
-            <AddUserForm/>
+            <AddUserForm onAddUser={props.onAddUser} />
         </div>
     );
 };

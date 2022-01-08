@@ -13,6 +13,13 @@ const AddUserForm = (props) => {
         setEnteredAge(event.target.value);
     };
 
+    const onAddUserButtonClick = (event) => {
+        event.preventDefault();
+        props.onAddUser(enteredUsername, enteredAge);
+        setEnteredUsername("");
+        setEnteredAge("");
+    };
+
     return (
         <form className="add-user-form" onSubmit={props.onAddUser}>
             <div className="form-controls">
@@ -38,7 +45,9 @@ const AddUserForm = (props) => {
             <Button
                 type="submit"
                 className="btn-primary"
-                onButtonClick={props.onAddUser}
+                onButtonClick={(event) => {
+                    onAddUserButtonClick(event);
+                }}
             >
                 Add user
             </Button>
