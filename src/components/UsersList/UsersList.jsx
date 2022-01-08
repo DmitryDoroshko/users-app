@@ -17,6 +17,7 @@ const UsersList = (props) => {
             {users.map((user) => (
                 <UserItem
                     key={user.id}
+                    id={user.id}
                     name={user.username}
                     age={user.age}
                     onUserDelete={userDeleteHandler}

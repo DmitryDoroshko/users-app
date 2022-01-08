@@ -80,11 +80,20 @@ const App = () => {
         });
     };
 
+    const userDeleteHandler = (id) => {
+        if (users.findIndex(user => user.id === id) !== -1) {
+            setUsers(prevUsers => {
+                const updatedUsers = prevUsers.filter(user => user.id !== id);
+                return updatedUsers;
+            });
+        }
+    };
+
     return (
         <div className="app">
             {error ? <ErrorModal errorTitle={error.title} errorText={error.text} onConfirm={errorHandler} /> : ""}
             <AddUser error={error} onAddUser={addUserHandler} />
-            <UsersList users={users} />
+            <UsersList users={users} onUserDelete={userDeleteHandler} />
         </div>
     );
 }
