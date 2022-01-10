@@ -1,100 +1,105 @@
-*, *:after, *:before {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*,
+*:after,
+*:before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  font-size: 16px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    box-sizing: border-box;
 }
 
 .app {
-  margin: 3rem auto 0 auto;
-  width: 50rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    margin: 3rem auto 0 auto;
+    width: 100%;
+    max-width: 50rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Add User */
 .add-user {
-  display: block;
+    display: block;
 }
 
 /* Users  List*/
 .users-list {
-  display: block;
-  padding: 3rem;
-  list-style-type: none;
+    display: block;
+    padding: 3rem;
+    list-style-type: none;
 }
 
 .users-item {
-  border: 2px solid black;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 2rem 2rem 2rem 2rem;
-  margin-bottom: 1rem;
+    border: 2px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 2rem 2rem 2rem;
+    margin-bottom: 1rem;
 }
 
 .users-info {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
 }
 
 .add-user-form button {
-  margin-top: 1.5rem;
-  width: 100%;
+    margin-top: 1.5rem;
+    width: 100%;
 }
 
 .form-controls input {
-  padding: 0.5rem 0.3rem 0.5rem 0.3rem;
-  width: 100%;
-  border-radius: 5px;
+    padding: 0.5rem 0.3rem 0.5rem 0.3rem;
+    width: 100%;
+    border-radius: 5px;
 }
 
 /* Button */
 .btn {
-  background: #73bce8;
-  outline: none;
-  border: none;
-  padding: 0.5rem 1.5rem;
-  border-radius: 0.3rem;
-  cursor: pointer;
-  color: black;
-  text-transform: uppercase;
+    background: #73bce8;
+    outline: none;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    color: black;
+    text-transform: uppercase;
 }
 
 .btn-error {
-  background: #4F005FFF;
-  color: white;
-  transition: all 0.3s ease-in-out;
+    background: #4f005fff;
+    color: white;
+    transition: all 0.3s ease-in-out;
 }
 
 .btn-error:hover {
-  background: rgba(79, 0, 95, 0.81);
+    background: rgba(79, 0, 95, 0.81);
 }
 
 .btn-primary {
-  color: white;
-  background: #f34c4c;
+    color: white;
+    background: #f34c4c;
 }
 
-.btn-delete, .btn-edit {
-  padding: 0.25rem 1rem;
-  text-transform: capitalize;
+.btn-delete,
+.btn-edit {
+    padding: 0.25rem 1rem;
+    text-transform: capitalize;
 }
 
 .btn-edit {
-  color: white;
-  background: blue;
+    color: white;
+    background: blue;
 }
 
 .btn-delete {
-  background: yellow;
-  color: black;
+    background: yellow;
+    color: black;
 }
