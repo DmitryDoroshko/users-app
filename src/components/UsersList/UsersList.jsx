@@ -8,8 +8,8 @@ const UsersList = (props) => {
         onUserDelete(id);
     };
 
-    const userEditHandler = (id) => {
-        onUserEdit(id);
+    const userEditHandler = (id, name, age) => {
+        onUserEdit(id, name, age);
     };
 
     return (

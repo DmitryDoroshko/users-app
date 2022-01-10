@@ -8,6 +8,10 @@ import { v4 as uuid4 } from "uuid";
 const App = () => {
     const [error, setError] = useState(null);
     const [users, setUsers] = useState(initialUsers);
+    const [isEditingUser, setIsEditingUser] = useState(false);
+    const [idOfUserBeingEdited, setIdOfUserBeingEdited] = useState(-1);
+    const [previousUsername, setPreviousUsername] = useState("");
+    const [previousAge, setPreviousAge] = useState("");
 
     const errorHandler = () => {
         if (!error) {
@@ -89,11 +93,49 @@ const App = () => {
         }
     };
 
+    const startUserEditing = (id, prevUsername, prevAge) => {
+        setIsEditingUser(true);
+        setIdOfUserBeingEdited(id);
+        setPreviousUsername(prevUsername);
+        setPreviousAge(prevAge);
+    };
+
+    const editUserHandler = (id, newUsername, newAge) => {
+
+        if (!newUsername) {
+            setIsEditingUser(false);
+            return;
+        }
+
+        if (!newAge) {
+            setIsEditingUser(false);
+            return;
+        }
+
+        setIsEditingUser(false);
+        setUsers(previousUsers => {
+            const updatedUsers = previousUsers.map(user => {
+                if (user.id === id) {
+                    return { id, username: newUsername, age: +newAge };
+                }
+                return user;
+            });
+
+            return updatedUsers;
+        });
+    };
+
     return (
         <div className="app">
             {error ? <ErrorModal errorTitle={error.title} errorText={error.text} onConfirm={errorHandler} /> : ""}
-            <AddUser error={error} onAddUser={addUserHandler} />
-            <UsersList users={users} onUserDelete={userDeleteHandler} />
+            <AddUser error={error}
+                onAddUser={addUserHandler}
+                onEditUser={editUserHandler}
+                isEditing={isEditingUser}
+                idOfUserBeingEdited={idOfUserBeingEdited}
+                previousUsername={previousUsername}
+                previousAge={previousAge} />
+            <UsersList users={users} onUserDelete={userDeleteHandler} onUserEdit={startUserEditing} />
         </div>
     );
 }

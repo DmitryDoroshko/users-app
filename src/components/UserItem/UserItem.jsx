@@ -8,6 +8,10 @@ const UserItem = (props) => {
         onUserDelete(id);
     };
 
+    const userEditHandler = () => {
+        onUserEdit(id, name, age);
+    };
+
     return (
         <li className="users-item">
             <div className="users-info">
@@ -17,7 +21,7 @@ const UserItem = (props) => {
                 <Button
                     type="button"
                     className="btn-edit"
-                    onButtonClick={onUserEdit}
+                    onButtonClick={userEditHandler}
                 >
                     Edit
                 </Button>

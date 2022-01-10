@@ -1,24 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../UI/Button/Button";
 
 const AddUserForm = (props) => {
+    const {
+        isEditing,
+        idOfUserBeingEdited,
+        previousUsername,
+        previousAge,
+        onAddUser,
+        onEditUser,
+    } = props;
     const [enteredUsername, setEnteredUsername] = useState("");
     const [enteredAge, setEnteredAge] = useState("");
+    const [editedUsername, setEditedUsername] = useState(previousUsername);
+    const [editedAge, setEditedAge] = useState(previousAge);
+    const [userBeingEditedNow, setUserBeingEditedNow] = useState(isEditing);
 
     const enteredUsernameChangeHandler = (event) => {
-        setEnteredUsername(event.target.value);
+        if (userBeingEditedNow) {
+            setEditedUsername(event.target.value);
+        } else {
+            setEnteredUsername(event.target.value);
+        }
     };
 
     const enteredAgeChangeHandler = (event) => {
-        setEnteredAge(event.target.value);
+        if (userBeingEditedNow) {
+            setEditedAge(event.target.value);
+        } else {
+            setEnteredAge(event.target.value);
+        }
     };
 
-    const onAddUserButtonClick = (event) => {
+    const handleButtonClick = (event) => {
         event.preventDefault();
-        props.onAddUser(enteredUsername, enteredAge);
-        setEnteredUsername("");
-        setEnteredAge("");
+
+        if (userBeingEditedNow) {
+            onEditUser(idOfUserBeingEdited, editedUsername, editedAge);
+            setEditedUsername("");
+            setEditedAge("");
+        } else {
+            onAddUser(enteredUsername, enteredAge);
+            setEnteredUsername("");
+            setEnteredAge("");
+        }
     };
+
+    useEffect(() => {
+        setUserBeingEditedNow(isEditing);
+        setEditedUsername(previousUsername);
+        setEditedAge(previousAge);
+    }, [isEditing, previousUsername, previousAge]);
 
     return (
         <form className="add-user-form" onSubmit={props.onAddUser}>
@@ -28,7 +60,9 @@ const AddUserForm = (props) => {
                     type="text"
                     id="username"
                     className="username-input"
-                    value={enteredUsername}
+                    value={
+                        userBeingEditedNow ? editedUsername : enteredUsername
+                    }
                     onChange={enteredUsernameChangeHandler}
                 />
             </div>
@@ -38,18 +72,20 @@ const AddUserForm = (props) => {
                     type="number"
                     id="age"
                     className="age-input"
-                    value={enteredAge}
+                    value={userBeingEditedNow ? editedAge : enteredAge}
                     onChange={enteredAgeChangeHandler}
                 />
             </div>
             <Button
                 type="submit"
-                className="btn-primary"
+                className={`btn ${
+                    userBeingEditedNow ? "btn-edit" : "btn-primary"
+                }`}
                 onButtonClick={(event) => {
-                    onAddUserButtonClick(event);
+                    handleButtonClick(event);
                 }}
             >
-                Add user
+                {userBeingEditedNow ? "Edit User" : "Add User"}
             </Button>
         </form>
     );
